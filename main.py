@@ -18,7 +18,7 @@ def conflits(T):
             if T[i] == T[j] or abs(i - j) == abs(T[i] - T[j]):
                 m +=1
         S += m -1
-        print(f" {i} : {m-1}")
+        print(f" {T[i]} : {m-1}")
     return S
 
 
@@ -55,6 +55,17 @@ def _show_queens_in_echec(matrice,T):
     return matrice
 
 
+def _view_result(T, values, echec):
+    print(f"=================================================================================================")
+    print(f"                                 R E S U L T A T     F I N A L  ")
+    print(f"================================================================================================= \n")
+
+    print(f"    La solution efficace est :  f = {T}")
+    print(f"    Le nombre total de conflit est :   {values[-1]} ")
+    print(f"    La table des conflits : {values} \n")
+    print(f" representation matricielle : \n\n{_show_queens_in_echec(echec, T)}")
+
+
 if __name__ == '__main__':
     n = 8
     s = 0
@@ -64,13 +75,14 @@ if __name__ == '__main__':
 
     # initialisation
     #T = [7, 0, 1, 3, 1, 5, 2, 4]
-    T = _initialize(n)
+    T = [2,5,6,1,4,4,7,3]
+    #T = _initialize(n)
     print(T)
     s = conflits(T)
     tables_values.append(s)
 
     while is_ok == False:
-        T1 = regeneration_s(T,1,2)
+        T1 = regeneration_s(T,0,2)
         print(T1)
         s1 = conflits(T1)
         if s1 > tables_values[-1] :
@@ -79,7 +91,4 @@ if __name__ == '__main__':
             T = T1
             tables_values.append(s1)
 
-
-    print(T)
-    print(tables_values)
-    print(_show_queens_in_echec(echequier,T))
+    _view_result(T, tables_values, echequier)
